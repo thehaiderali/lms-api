@@ -1,5 +1,7 @@
 import Quiz from "../models/quiz.model.js";
 import { updateQuizSchema, zodErrorParser } from "../utils/zod.js";
+import mongoose from "mongoose";
+
 export async function getQuizById(req, res) {
     try {
         const quizId = req.params.id;

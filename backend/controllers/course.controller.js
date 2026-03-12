@@ -5,6 +5,8 @@ import Enrollment from "../models/enrollment.model.js"
 import Lesson from "../models/lesson.model.js"
 import { zodErrorParser } from "../utils/zod.js";
 import QuizAttempt from "../models/quizAttempt.model.js";
+import Progress from "../models/progress.model.js";
+import Quiz from "../models/quiz.model.js";
 import mongoose from "mongoose";
 
 export async function createCourse(req,res){
@@ -455,7 +457,7 @@ export async function getLessonsforCourse(req, res) {
 
 export async function getCourseProgress(req, res) {
     try {
-        const courseId = req.params.courseId;
+        const courseId = req.params.id;
         const queryStudentId = req.query.studentId;
 
         const userId = req.user?.userId;
@@ -597,7 +599,7 @@ export async function getCourseProgress(req, res) {
 
 export async function getCourseAnalytics(req, res) {
     try {
-        const courseId = req.params.courseId;
+        const courseId = req.params.id;
         const userId = req.user?.userId;
         const role = req.user?.role;
 
@@ -654,7 +656,7 @@ export async function getCourseAnalytics(req, res) {
 
         const quizIds = quizzes.map(q => q._id);
 
-        const submissions = await QuizSubmission.find({
+        const submissions = await QuizAttempt.find({
             quizId: { $in: quizIds }
         });
 

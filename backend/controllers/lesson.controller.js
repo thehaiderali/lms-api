@@ -1,7 +1,9 @@
 import Lesson from "../models/lesson.model.js";
 import { createQuizSchema, updateLessonSchema } from "../utils/zod.js";
-import { createLessonSchema } from "../utils/zod.js";
+import Progress from "../models/progress.model.js"
 import Quiz from "../models/quiz.model.js"
+import Course from "../models/course.model.js";
+import mongoose from "mongoose";
 
 
 
@@ -272,7 +274,7 @@ export async function addQuiztoLesson(req, res) {
 
 export async function completeLesson(req, res) {
     try {
-        const lessonId = req.params.lessonId;
+        const lessonId = req.params.id;
         const studentId = req.user?.userId;
         const role = req.user?.role;
 
