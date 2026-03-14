@@ -16,9 +16,6 @@ app.use("/lessons",lessonRouter)
 app.use("/quizzes",quizRouter)
 
 
-
-
-
 const port=process.env.PORT || 3000
 app.listen(port,async()=>{
     await connectDB()
