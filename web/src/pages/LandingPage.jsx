@@ -40,14 +40,14 @@ export default function LandingPage() {
                 {item.name}
               </a>
             ))}
-            <Button size="sm" variant="ghost" onClick={() => setDarkMode(!darkMode)} className="ml-2">
-              {darkMode ? "☀️" : "🌙"}
-            </Button>
           </div>
 
           <div className="flex items-center gap-3">
             <Button variant="ghost" size="sm">Log In</Button>
             <Button size="sm">Sign Up</Button>
+             <Button size="sm" variant="ghost" onClick={() => setDarkMode(!darkMode)} className="ml-2">
+              {darkMode ? "☀️" : "🌙"}
+            </Button>
           </div>
         </div>
       </nav>
@@ -213,7 +213,7 @@ export default function LandingPage() {
         </div>
         
         <div className="text-center text-sm text-muted-foreground mt-8 pt-4 border-t">
-          © 2024 Learnix. All rights reserved. ISC Licensed
+          © 2026 Learnix. All rights reserved. ISC Licensed
         </div>
       </footer>
     </div>
