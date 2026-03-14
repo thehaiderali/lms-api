@@ -47,15 +47,29 @@ export const createLessonSchema = z.object({
     .min(3, "Title must be at least 3 characters")
     .max(150, "Title must not exceed 150 characters"),
   content: z.string()
-    .min(10, "Content must be at least 10 characters"),
-  videoUrl: z.string().url("Invalid URL format").optional(),
-  resourceUrl: z.url("Invalid URL format").optional(),
+    .min(10, "Content must be at least 10 characters")
+    .optional(), // Make it optional
+  videoUrl: z.string()
+    .url("Invalid URL format")
+    .optional()
+    .nullable(), // Allow null/undefined
+  resourceUrl: z.string()
+    .url("Invalid URL format")
+    .optional()
+    .nullable(),
   order: z.number()
     .int("Order must be an integer")
     .positive("Order must be greater than 0"),
   duration: z.number()
     .positive("Duration must be greater than 0")
     .optional()
+    .nullable()
+}).refine(data => {
+  // At least one of content or videoUrl must be provided
+  return data.content || data.videoUrl;
+}, {
+  message: "Either content or video URL must be provided",
+  path: ["content"] // Show error on content field
 });
 
 export  const createQuizSchema = z.object({

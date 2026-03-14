@@ -2,7 +2,7 @@
 import axios from 'axios';
 import { setTimeout } from 'timers/promises';
 
-const API_BASE_URL = 'http://localhost:3000';
+const API_BASE_URL = 'http://localhost:3000/api';
 let authToken = {};
 let createdIds = {
   teacher: null,

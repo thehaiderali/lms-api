@@ -66,17 +66,20 @@ export async function createCourse(req,res){
 
 }
 
-
 export async function getCourses(req, res) {
     try {
         const page = parseInt(req.query.page) || 1;
         const limit = parseInt(req.query.limit) || 10;
         const category = req.query.category;
         const search = req.query.search;
+        const teacherId=req.query.teacherId;
 
         let filter = {};
         if (category) {
             filter.category = category;
+        }
+        if(teacherId){
+            filter.teacherId=teacherId;
         }
         if (search) {
             filter.$or = [
@@ -112,8 +115,6 @@ export async function getCourses(req, res) {
         });
     }
 }
-
-
 export async function getCourseById(req,res){
 
     try {
@@ -357,11 +358,12 @@ export async function addLessonToCourse(req,res){
         })
      }   
 
-     const {success,error:ValidationError,data}=createLessonSchema.safeParse(req.body);
+     const {success,error,data}=createLessonSchema.safeParse(req.body);
      if(!success){
+        console.log(error);
         return res.status(400).json({
             success:false,
-            error:zodErrorParser(ValidationError)
+            error:"Invalid Fields"
         })
      }
     const existingTitle = await Lesson.findOne({ title: data.title, });

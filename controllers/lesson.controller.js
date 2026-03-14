@@ -4,6 +4,7 @@ import Progress from "../models/progress.model.js"
 import Quiz from "../models/quiz.model.js"
 import Course from "../models/course.model.js";
 import mongoose from "mongoose";
+import { zodErrorParser } from "../utils/zod.js";
 
 
 
@@ -77,7 +78,7 @@ export async function updateLessonById(req, res) {
         if (!success) {
             return res.status(400).json({
                 success: false,
-                error: zodErrorParser(validationError)
+                error: validationError
             });
         }
 

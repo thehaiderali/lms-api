@@ -10,7 +10,9 @@ import quizRouter from "./routes/quiz.routes.js"
 
 const app=express()
 app.use(express.json())
-app.use(cors())
+app.use(cors({
+    origin:process.env.FRONTEND_URL
+}))
 app.get("/",(_,res)=>res.send("LMS PLATFROM"))
 app.use("/api/auth",authRouter)
 app.use("/api/courses",courseRouter)
